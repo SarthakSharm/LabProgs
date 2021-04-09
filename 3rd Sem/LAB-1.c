@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<conio.h>
-#define MAX 15
+#define MAX 10
 
 int a[MAX],n,elem,i,pos ;
 
