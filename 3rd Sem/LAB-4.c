@@ -1,138 +1,77 @@
-#include<stdio.h>
+#define SIZE 50 /* Size of Stack */
+#include <ctype.h>
+#include <stdio.h>
 #include<conio.h>
-#include<string.h>
 
-#define MAX 10
-int stack[MAX],item;
-int ch, top=-1, count = 0 ;
 
-void push(char symb){
-    stack[++top]  = symb;
-}
+char s[SIZE];
+int top = -1; /* Global declarations */
 
-int pop(){
-    return stack[top--];
-}
-
-int p(char symbol)
+int push(char elem) /* Function for PUSH operation */
 {
-	switch(symbol)
-	{
-		case '+' :
-		case '-':
-			return 1;
-            break;
+    s[++top] = elem;
+    return 0;
+}
 
-		case '*':
-		case '/':
-        case '%':
-			return 2;
-            break;
+char pop() /* Function for POP operation */
+{
+    return (s[top--]);
+}
 
-		case '^':
-		case '$': 
-			return 3;
-            break;
-
-		case '(':
-        case ')':
+int pr(char elem) /* Function for precedence */
+{
+    switch (elem)
+    {
+        case '#':
             return 0;
-
-		case '#': 
-            return -1;		
-	}
-    
+        case '(':
+            return 1;
+        case '+':
+        case '-':
+            return 2;
+        case '*':
+        case '/':
+        case '%':
+            return 3;
+        case '^':
+            return 4;
+    }
+    return 0;
 }
 
-/*int G(char symbol)
+int main() /* Main Program */
 {
-	switch(symbol)
-	{
-		case '+':
-		case '-':
-			return 1;
-
-		case '*':
-		case '/':
-			return 3;
-
-		case '^':
-		case '$': 
-			return 6;
-
-	    case '(': return 9;
-
-        case ')': return 0;
-
-        default: return 7;
-    }
-}*/
-
-/*void i_p(char infix[], char postfix[]){
-    int top, i , j;
-    char s[30], symbol;
-    top=-1;
-    s[++top]='#';
-    for( i = 0 ; i < strlen(infix); i++){
-        symbol=infix[i];
-        while(F(s[top])>G(symbol)){
-            postfix[j]=s[top--];
-            j++;
-        }
-        if(F(s[top])!= G(symbol))
-            s[++top] = symbol;
-        else
-            top--;
-    }
-}*/
-
-void inf_to_pos(char infix[],char postfix[]){
-    int i , j =0 ;
-    char symb, temp;
+    char infix[50], postfix[50], ch, elem;
+    int i = 0, k = 0;
+    printf("\n\nEnter the Infix Expression ");
+    scanf("%s", infix);
     push('#');
-    for(i=0; infix[i]!='\0';++i){
-        symb=infix[i];
-        switch(symb){
-            case '(' : push(symb);
-              break;
-            case ')' : temp=pop();
-                while(temp!='('){
-                    postfix[j++]=temp;
-                    temp=pop();
-                }
-                break;
-            case '+':
-            case '-':
-            case '/':
-            case '*':
-            case '%':
-            case '^':
-            case '$':
-                while(p(stack[top>=p(symb)]))
-                {
-                    temp=pop();
-                    postfix[j++]=temp;
-                }
-                push(symb);
-                break;
-            default: postfix[j++]=symb;
-
+    
+    while ((ch = infix[i++]) != '\0')
+    {
+        if (ch == '(')
+            push(ch);
+        else if (isalnum(ch))
+            postfix[k++] = ch;
+        else if (ch == ')')
+        {
+            while (s[top] != '(')
+            postfix[k++] = pop();
+            pop(); /* Remove ( */
+        }
+        else /* Operator */
+        {
+            while (pr(s[top]) >= pr(ch))
+            postfix[k++] = pop();
+            push(ch);
         }
     }
-    while(top>0){
-        temp=pop();
-        postfix[j++]=temp;
-    }
-    postfix[j]='\0';
-}
-
-
-void main()
-{
-    char infix[20],postfix[20];
-    printf("Enter infix\n");
-    gets(infix);
-    inf_to_pos(infix,postfix);
-    printf("Infix:%s\nPostfix:%s\n",infix,postfix);
+    
+    while (s[top] != '#') /* Pop from stack till empty */
+        postfix[k++] = pop();
+    postfix[k] = '\0'; /* Make pofx as valid string */
+    printf("\n\nGiven Infix Expn: %s \nPostfix Expn: %s\n", infix, postfix);
+    getch();
+    return 0;
     getch();
 }
