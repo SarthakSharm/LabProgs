@@ -1,4 +1,4 @@
-#define SIZE 50 /* Size of Stack */
+#define SIZE 55 /* Size of Stack */
 #include <ctype.h>
 #include <stdio.h>
 #include<conio.h>
