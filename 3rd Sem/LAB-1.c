@@ -2,7 +2,7 @@
 #include<conio.h>
 #define MAX 27
 
-int a[MAX],n,elem,i,pos ;
+int a[MAX],n,elem,i,pos,j ;
 
 int create(){
     printf("size: ");
