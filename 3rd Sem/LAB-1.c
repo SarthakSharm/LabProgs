@@ -1,5 +1,5 @@
 #include<stdio.h>//bhasle
-#include<conio.h>
+//#include<conio.h>
 #define MAX 27
 
 int a[MAX],n,elem,i,pos,j ;
@@ -54,6 +54,6 @@ int main(){
             default: printf("Invalid!\n"); break;
         }
     }while(ch!=5);
-    getch();
+    //getch();
     return 0;
 }
