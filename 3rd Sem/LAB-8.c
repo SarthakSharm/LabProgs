@@ -1,5 +1,4 @@
 
-
 #include<string.h>
 #include<iostream>
 #include<conio.h>
@@ -27,7 +26,7 @@ void create()
 	temp =(struct node *)malloc(sizeof(struct node));
 	temp->prev = NULL;
 	temp->next = NULL;
-	printf("\n Enter ssn,name,department, designation, salary and phno of employee : ");
+	printf("\n Enter usn,name,department, designation, salary and phno of employee : ");
 	scanf("%d %s %s %s %f %d", &ssn, name,dept,desg,&sal, &phno);
 	temp->ssn = ssn;
 	strcpy(temp->name,name);
