@@ -1,5 +1,5 @@
 #include<stdio.h>//bhasle
-//#include<conio.h>
+
 #define MAX 27
 
 int a[MAX],n,elem,i,pos,j ;
